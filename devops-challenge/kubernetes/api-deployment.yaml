@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: api-service
+  namespace: devops-challenge
   labels:
     app: api-service
 spec:
@@ -23,15 +24,26 @@ spec:
           name: http
           protocol: TCP
         env:
-        # Environment variables from mysql-secret
         - name: DB_HOST
-          value: mysql
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: DB_HOST
         - name: DB_PORT
-          value: "3306"
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: DB_PORT
         - name: DB_DATABASE
-          value: db
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: DB_DATABASE
         - name: DB_USERNAME
-          value: user
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: DB_USERNAME
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
