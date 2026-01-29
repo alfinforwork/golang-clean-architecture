@@ -7,7 +7,6 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/teten-nugraha/golang-crud/domain"
 	"os"
-	"path/filepath"
 )
 
 func InitDB() *gorm.DB  {
