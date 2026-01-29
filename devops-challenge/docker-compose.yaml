@@ -49,12 +49,10 @@ services:
       retries: 3
       start_period: 40s
 
-# Named volumes for data persistence
 volumes:
   mysql_data:
     driver: local
 
-# Network definition
 networks:
   project-network:
     driver: bridge
