@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: replication-controller-nginx
+spec:
+  replicas: 3
+  selector:
+    app: nginx # must match the label in the pod template
+  template:
+    metadata:
+      name: nginx-pod
+      labels:
+        app: nginx # must match the selector above
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: / # health check endpoint
+              port: 80
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            failureThreshold: 3
+            successThreshold: 1
+            timeoutSeconds: 1
