@@ -37,9 +37,9 @@ func migrateDDL(db *gorm.DB) {
 }
 
 func processENV() {
-
-	err := godotenv.Load(".env")
-	if err != nil {
-		logrus.Error("Error loading env file")
+	if _, err := os.Stat(".env"); err == nil {
+		if err := godotenv.Load(".env"); err != nil {
+			logrus.Warn("Error loading env file: " + err.Error())
+		}
 	}
 }
