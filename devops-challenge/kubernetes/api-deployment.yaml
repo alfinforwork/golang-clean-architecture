@@ -18,7 +18,8 @@ spec:
       containers:
       - name: api-service
         image: ghcr.io/alfinforwork/golang-clean-architecture:latest
-        imagePullPolicy: IfNotPresent
+        # just for demo purpose, in production use IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 9999
           name: http
